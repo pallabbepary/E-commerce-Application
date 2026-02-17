@@ -1,12 +1,34 @@
 //button Load
 const categoryButton = () => {
+
+    document.getElementById('bannerSection').classList.add('hidden');
+    document.getElementById('WhyChooseUsSection').classList.add('hidden');
+
+
+        document.getElementById('ourProductsSection').classList.remove('hidden');
+        document.getElementById('allProductContainer').classList.remove('hidden');
+
+
     const url = ("https://fakestoreapi.com/products/categories")
     fetch(url)
     .then(res => res.json())
     .then(data => {
         displayButton(data)
+        allProductLoad()
     })
 } 
+
+const showHomeSection = () => {
+    document.getElementById('bannerSection').classList.remove('hidden');
+    document.getElementById('WhyChooseUsSection').classList.remove('hidden');
+    
+
+    document.getElementById('ourProductsSection').classList.add('hidden');
+    document.getElementById('allProductContainer').classList.add('hidden');
+    document.getElementById('categoryProducts').classList.add('hidden');
+    
+};
+
 //Display Button
 const displayButton = (categoryBtns) =>{
     // console.log(categoryBtns)
@@ -29,7 +51,7 @@ const displayButton = (categoryBtns) =>{
     })
 }
 
-categoryButton()
+// categoryButton()
 
 //Load product
 
@@ -82,6 +104,11 @@ const displayAllProduct = (allProducts) =>{
 
 
 const loadCategory = (category) => {
+
+    document.getElementById('allProductContainer').classList.add('hidden');
+    document.getElementById('categoryProducts').classList.remove('hidden');
+
+
     const url = `https://fakestoreapi.com/products/category/${category}`
     fetch(url)
     .then(res => res.json())
