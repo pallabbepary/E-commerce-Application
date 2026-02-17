@@ -37,7 +37,7 @@ const displayButton = (categoryBtns) =>{
 
     const allBtn = document.createElement("div")
   allBtn.innerHTML = `
-    <button id = "allProduct" onclick = "allProductLoad()" class="btn rounded-2xl bg-white">All</button>
+    <button id = "allProduct" onclick = "allProductLoad()" class="  btn text-white rounded-2xl bg-blue-700">All</button>
   `
   ourProducts.append(allBtn)
  
@@ -45,7 +45,7 @@ const displayButton = (categoryBtns) =>{
         // console.log(categoryBtn)
         const btnDiv = document.createElement("div")
         btnDiv.innerHTML = `
-            <button onclick = "loadCategory('${categoryBtn.replace(/'/g,"\\'")}')" class = "btn rounded-2xl bg-white">${categoryBtn}</button>
+            <button id = "btn-${categoryBtn}" onclick = "loadCategory('${categoryBtn.replace(/'/g,"\\'")}')" class = "btn-category btn rounded-2xl  bg-white">${categoryBtn}</button>
         `
         ourProducts.append(btnDiv)
     })
@@ -79,7 +79,7 @@ const displayAllProduct = (allProducts) =>{
                     alt="" />
                 </div>
                 <div class="card-body">
-                    <ul class="flex justify-between items-center">
+                    <ul class="md:flex justify-between items-center">
                         <li class="bg-blue-100 rounded-full px-2">${allProduct.category}</li>
                         <ul class="flex gap-1 items-center">
                             <i class="fa-solid fa-star text-orange-400"></i>
@@ -91,7 +91,7 @@ const displayAllProduct = (allProducts) =>{
                     <h2 class="card-title text-base font-medium truncate line-clamp-2">${allProduct.title}</h2>
                     <div class="font-bold text-lg">$${allProduct.price}</div>
                     <div class="flex justify-between">
-                    <button class="btn shadow-md bg-none rounded-lg"><i class="fa-regular fa-eye"></i> Details</button>
+                    <button onclick = "my_modal_5.showModal()" class="btn shadow-md bg-none rounded-lg"><i class="fa-regular fa-eye"></i> Details</button>
                     <button class="btn text-white bg-blue-700 rounded-lg"><i class="fa-solid fa-cart-shopping"></i>Add</button>
                     </div>
                 </div>
@@ -101,6 +101,14 @@ const displayAllProduct = (allProducts) =>{
     })
     
 }
+
+
+// Active remove
+const removeActive = () =>{
+    const removeActiveBtn = document.querySelectorAll(".btn-category")
+    removeActiveBtn.forEach(btn => btn.classList.remove("active"))
+} 
+
 
 
 const loadCategory = (category) => {
@@ -113,6 +121,10 @@ const loadCategory = (category) => {
     fetch(url)
     .then(res => res.json())
     .then(data => {
+        removeActive();
+        const clickBtn = document.getElementById(`btn-${category}`)
+        // console.log(clickBtn)
+        clickBtn.classList.add("active");
         loadCategoryDisplay(data)
     })
 }
@@ -146,7 +158,7 @@ const loadCategoryDisplay = (categoryProducts) => {
                     <h2 class="text-lg font-medium truncate card-title">${categoryProduct.title}</h2>
                     <div class="font-bold text-lg">$${categoryProduct.price}</div>
                     <div class="flex justify-between">
-                    <button class="btn shadow-md bg-none rounded-lg"><i class="fa-regular fa-eye"></i> Details</button>
+                    <button onclick = "loadShowModal(${categoryProduct.id})" class="btn shadow-md bg-none rounded-lg"><i class="fa-regular fa-eye"></i> Details</button>
                     <button class="btn text-white bg-blue-700 rounded-lg"><i class="fa-solid fa-cart-shopping"></i>Add</button>
                     </div>
                 </div>
@@ -157,3 +169,44 @@ const loadCategoryDisplay = (categoryProducts) => {
 }
 
 // loadCategory()
+
+
+const loadShowModal = async (id) => {
+    const url = `https://fakestoreapi.com/products/${id}`
+    // console.log(url)
+    const res = await fetch(url);
+    const details = await res.json();
+    displayDetails(details);
+}
+
+const displayDetails = (ProductDetail) => {
+    // console.log(ProductDetail)
+    const detailsBox = document.getElementById("detailsContainer")
+    detailsBox.innerHTML = `
+        <div class="rounded-xl border border-gray-300">
+                <div class = "bg-[#cfcfd4] rounded-t-xl">
+                    <img class = "mx-auto h-64 object-contain""
+                    src="${ProductDetail.image}"
+                    alt="" />
+                </div>
+                <div class="card-body">
+                    <ul class="flex justify-between items-center">
+                        <li class="bg-blue-100 rounded-full px-2">${ProductDetail.category}</li>
+                        <ul class="flex gap-1 items-center">
+                            <i class="fa-solid fa-star text-orange-400"></i>
+                            <li>${ProductDetail.rating.rate}
+                            <li>(${ProductDetail.rating.count})</li>
+                        </li>
+                        </ul>
+                    </ul>
+                    <h2 class="text-lg font-medium card-title">${ProductDetail.title}</h2>
+                    <p>${ProductDetail.description}</p>
+                    <div class="font-bold text-lg">$${ProductDetail.price}</div>
+                    <div class="flex justify-between">
+                    </div>
+                </div>
+                </div>
+    `
+    document.getElementById("my_modal_5").showModal()
+
+}

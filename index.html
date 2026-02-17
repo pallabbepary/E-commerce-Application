@@ -25,7 +25,7 @@
             <section>
                 <div class="navbar  w-11/12 mx-auto">
                     <div class="navbar-start">
-                        <a href="" class="text-xl font-bold text-blue-600">SwiftCart</a>
+                        <a href="" class="text-2xl font-extrabold text-blue-600">SwiftCart</a>
                     </div>
                     <div class="navbar-center hidden lg:flex">
                         <ul class="menu menu-horizontal px-1 gap-4 items-center">
@@ -57,7 +57,7 @@
                                     <a onclick="showHomeSection()">Home </a>
                                 </li>
                                 <li>
-                                    <a>Products</a>
+                                    <a onclick="categoryButton()">Products</a>
                                 </li>
                                 <li>
                                     <a>About</a>
@@ -72,15 +72,15 @@
             </section>
         </nav>
         <!-- Our Product Section -->
-        <section id="ourProductsSection" class="text-center space-y-5 pt-5 hidden">
-            <h1 class="font-bold text-3xl">Our Products</h1>
-            <div id="ourProducts" class="flex gap-7 justify-center"></div>
+        <section id="ourProductsSection" class=" text-center space-y-5 pt-5 hidden">
+            <h1 class="pt-20 md:pt-0 font-bold text-3xl">Our Products</h1>
+            <div id="ourProducts" class="grid grid-cols-3 items-center md:flex gap-5 md:gap-7 md:justify-center py-16 md:py-20"></div>
         </section>
          <!-- All Product Section -->
-        <section id="allProductContainer" class="grid grid-cols-4 w-11/12 mx-auto gap-8 py-14 hidden">
+        <section id="allProductContainer" class="md:grid md:grid-cols-4 w-11/12 mx-auto gap-8 py-14 md:py-0 hidden">
             
         </section>
-        <section id="categoryProducts" class="w-11/12 mx-auto gap-8 py-14 grid grid-cols-4 justify-center hidden" >
+        <section id="categoryProducts" class="w-11/12 mx-auto gap-8 py-14 md:py-0 md:grid md:grid-cols-4 justify-center hidden" >
 
         </section>
     </header>
@@ -177,19 +177,19 @@
     </main>
     <footer class="bg-[#1b2736] py-10">
         <section class="w-10/12 mx-auto">
-            <div class="md:flex md:justify-center gap-20 border-b-2 border-gray-500 md:py-20">
+            <div class="md:flex md:justify-center gap-20 md:border-b-2 border-gray-500 md:py-20">
                 <div class="space-y-5">
                     <div class="">
-                        <a href="" class="text-3xl font-extrabold text-blue-600">SwiftCart</a>
+                        <a href="" class="text-2xl font-extrabold text-blue-600">SwiftCart</a>
                     </div>
-                    <p class="text-xl text-gray-400">Your one-stop ahop for all your fashion  and lifestyle needs. Quity products, fast  delivery, and excellent support</p>
+                    <p class="md:text-xl text-gray-400">Your one-stop ahop for all your fashion  and lifestyle needs. Quity products, fast  delivery, and excellent support</p>
                 </div>
 
                 <div class="text-white">
-                    <h1 class="text-gray-400 font-semibold">QUICK LINKS</h1>
+                    <h1 class="text-gray-400 font-bold pt-5">QUICK LINKS</h1>
                     <ul class="z-1 mt-3 w-52 p-2 text-gray-400 space-y-3">
                         <li class="">
-                            <a href="">Home </a>
+                            <a onclick="showHomeSection()">Home </a>
                         </li>
                         <li>
                             <a href="">Products</a>
@@ -204,7 +204,7 @@
                 </div>
 
                 <div>
-                    <h1 class="text-gray-400 font-semibold">SUPPORT</h1>
+                    <h1 class="text-gray-400 font-bold pt-5">SUPPORT</h1>
                     <ul class=" z-1 mt-3 w-52 p-2 text-gray-400 space-y-3">
                         <li>
                             <a href="">FAQ </a>
@@ -221,11 +221,11 @@
                     </ul>
                 </div>
                 <div class="text-gray-400 space-y-4">
-                    <h1 class="font-semibold">SUBSCRIBE TO OUR NEWSLETTER</h1>
-                    <p class="text-lg">The latest news, articles, and resources,
+                    <h1 class="font-bold pt-5">SUBSCRIBE TO OUR NEWSLETTER</h1>
+                    <p class="md:text-lg">The latest news, articles, and resources,
                         sent to your inbox weekly.
                     </p>
-                    <div class="md:flex md:gap-5 md:w-xs">
+                    <div class="flex gap-2 md:gap-5 md:w-xs">
                                                
                         <input type="email" class="input rounded-md" placeholder="Enter your email" />
 
@@ -244,6 +244,24 @@
                 </ul>
             </div>
         </section>
+
+        
+            <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+                <div class="modal-box">
+                    <div id="detailsContainer">
+                        
+                    </div>
+                    <div class="modal-action">
+                        <form method="dialog">
+                            <!-- if there is a button in form, it will close the modal -->
+                            <button class="btn"><i class="fa-solid fa-cart-shopping"></i>Add to Card</button>
+                        </form>
+                    </div>
+                </div>
+            </dialog>
+
+
+
     </footer>
     <script src="./index.js"></script>
 </body>
